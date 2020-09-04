@@ -1,0 +1,323 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="DSMaster.master.cs"   Inherits="Dashboard_DSMaster" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css" />
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css" />
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css" />
+    <link href="bower_components/morris.js/morris.css" rel="stylesheet" />
+    <link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css" />
+    <link href="css/Design.css" rel="stylesheet" />
+    <link href="css/custom.css" rel="stylesheet" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <%--  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">--%>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+    <style>
+        .main-footer1 {
+    background: #fff;
+    padding: 15px;
+    color: #444;
+    border-top: 1px solid #d2d6de;
+}
+   </style>
+   
+ <%--   <script type="text/javascript">
+
+        $(document).ready(function () {
+            function disableBack() { window.history.forward() }
+
+            window.onload = disableBack();
+            window.onpageshow = function (evt) { if (evt.persisted) disableBack() }
+        });
+        var ctrlKeyDown = false;
+
+        $(document).ready(function () {
+            $(document).on("keydown", keydown);
+            $(document).on("keyup", keyup);
+        });
+
+        function keydown(e) {
+
+            if ((e.which || e.keyCode) == 116 || ((e.which || e.keyCode) == 82 && ctrlKeyDown)) {
+                // Pressing F5 or Ctrl+R
+                e.preventDefault();
+            } else if ((e.which || e.keyCode) == 17) {
+                // Pressing  only Ctrl
+                ctrlKeyDown = true;
+            }
+        };
+
+        function keyup(e) {
+            // Key up Ctrl
+            if ((e.which || e.keyCode) == 17)
+                ctrlKeyDown = false;
+        };
+    </script>--%>
+    
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse fixed">
+    <form id="form1" runat="server">
+        <div class="wrapper">
+            <header class="main-header">
+                <!-- Logo -->
+                <a href="Dashboard.aspx" class="logo"  style="background-color:#337ab7" >
+                    <!-- mini logo for sidebar mini 50x50 pixels -->
+                    <span class="logo-mini"><b>QMS</span>
+                    <!-- logo for regular state and mobile devices -->
+                    <span class="logo-lg"><b>QMS</span>
+                </a>
+                <!-- Header Navbar: style can be found in header.less -->
+                <nav class="navbar navbar-static-top" style="top: 0px ;background-color:#337ab7">
+
+                    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+
+                            <!-- User Account: style can be found in dropdown.less -->
+                            <li class="dropdown user user-menu" >
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+                                    <span class="hidden-xs">
+                                        <asp:Label ID="lblUSName" runat="server" Text=""></asp:Label></span>
+                                    <!--Fatch username-->
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <!-- User image -->
+                                    <li class="user-header">
+                                        <%--<img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">--%>
+                                        <p>
+                                            <span>
+                                                <asp:Label ID="lblUserName" runat="server" Text=""></asp:Label>
+                                            </span>
+                                            <!--Fatch username and role-->
+                                            <br />
+                                            <span id="Today" class="DateStyle"></span>
+                                            <!--Fatch Current date-->
+
+                                        </p>
+                                    </li>
+                                    <li class="user-footer">
+
+                                        <div class="pull-left">
+                                            <asp:Button ID="btnLogout" OnClick="btnLogout_Click" TabIndex="-1" class="btn btn-default btn-flat" runat="server" Text="Sign out" />
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <!-- Left side column. contains the logo and sidebar -->
+            <aside class="main-sidebar">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar"  >
+                    <!-- Sidebar user panel -->
+                    <div class="user-panel">
+                        <div class="pull-left image" style="height: 20px">
+                        </div>
+                        <div class="pull-left info">
+                            <p>
+                                <asp:Label ID="lblUname" runat="server" Text=""></asp:Label></p>
+                            <a href="#"><i class="fa fa-circle text-success"></i>Online</a>
+                        </div>
+                    </div>
+                    
+                    <ul class="sidebar-menu" data-widget="tree">
+                        <li class="treeview" id="Li3" runat="server">
+                            <a href="#">
+                                <i class="fa fa-dashboard"></i><span>Dashboad Panel</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <!--dashboard-->
+                                <li class=" " id="piechart" runat="server">
+                                    <a href="Dashboard.aspx"><i class="fa fa-home"></i><span>HOME</span></a>
+                                </li>
+                               <%-- <li class=" " id="dashboard1" runat="server">
+                                    <a href="Dashboard.aspx"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
+                                </li>
+                                 <li class=" " id="DeviceHealth" runat="server">
+                                    <a href="DeviceHealth.aspx"><i class="fa fa-dashboard"></i><span>Device Health</span></a>
+                                </li>
+                                  <li class=" " id="Li4" runat="server">
+                                    <a href="Cassette_Dashboard.aspx"><i class="fa fa-dashboard"></i><span>Cassettes Status</span></a>
+                                </li>
+                                <li runat="server" id="callog"><a href="DashboardCallLog.aspx"><i class="fa fa-android"></i>CallLog Dashboard</a></li>--%>
+                            </ul>
+                        </li>
+                     
+                        <li class="treeview" id="adminpanel" runat="server" visible="true">
+                            <a href="#">
+                                <i class="fa fa-address-book"></i><span>Admin Panel</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>   
+                             <ul class="treeview-menu">
+                                <li class="active"><a href="Services.aspx"><i class="fa fa-circle-o"></i>Service Manage</a></li>
+                                 <li class="active"><a href="Terminal.aspx"><i class="fa fa-circle-o"></i>Terminal Manage</a></li>
+                                <%--<li><a href="ViewUser.aspx"><i class="fa fa-circle-o"></i>Manage User </a></li>--%>
+                            </ul>   
+                                                  
+                        </li>
+
+                       
+
+                        <!--User management-->
+                        <li class="treeview" id="usermanagement" runat="server" visible="false">
+                            <a href="#">
+                                <i class="fa fa-user-circle"></i><span>User Management</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li class="active"><a href="UserManage.aspx"><i class="fa fa-circle-o"></i>User Manage</a></li>
+                                <%--<li><a href="ViewUser.aspx"><i class="fa fa-circle-o"></i>Manage User </a></li>--%>
+                            </ul>
+                        </li>
+
+
+                        
+
+                    </ul>
+                </section>
+                <!-- /.sidebar -->
+            </aside>
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+
+            </div>
+            <!-- /.content-wrapper -->
+          
+            <!-- Control Sidebar -->
+
+            <!-- /.control-sidebar -->
+            <!-- Add the sidebar's background. This div must be placed
+             immediately after the control sidebar -->
+            <div class="control-sidebar-bg"></div>
+        </div>
+        <!-- ./wrapper -->
+
+    </form>
+      <footer class="main-footer1" style="margin-top:80px" >
+                <div class="pull-right  hidden-xs image">
+                    <img style="margin-top: -10px; height: 38px; width: 40px;" src="images/logo1.png" />
+                </div>           
+               <strong>Copyright &copy; 2020 <u>LIPI DATA SYSTEMS LTD. </u>|</strong> All rights
+            reserved
+            </footer>
+    <!-- ./wrapper -->
+
+    <!-- Custom JAVAScript -->
+    <script src="js/Custom.js"></script>
+    <!--Morris js -->
+    <script src="bower_components/morris.js/morris.min.js"></script>
+
+
+    <!-- jQuery UI 1.11.4 -->
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- DataTables -->
+    <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+    <!-- Sparkline -->
+    <script src="bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+    <!-- jvectormap -->
+    <script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="bower_components/moment/min/moment.min.js"></script>
+    <script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- datepicker -->
+    <script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <!-- Bootstrap WYSIHTML5 -->
+    <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <!-- Slimscroll -->
+    <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="bower_components/fastclick/lib/fastclick.js"></script>
+    <%-- iCheck--%>
+    <link rel="stylesheet" href="Dashboard/plugins/iCheck/square/blue.css">
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="dist/js/pages/dashboard.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demo.js"></script>
+
+    <script>
+        $(function () {
+            $('#GV_Template_Details').DataTable()
+            $('#example2').DataTable({
+                'paging': true,
+                'lengthChange': false,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'autoWidth': false
+            })
+        })
+    </script>
+
+
+    <script type="text/javascript">
+
+
+        $(function () {
+            $('input[name="BroadcastdateTime"]').daterangepicker({
+                timePicker: true,
+                startDate: moment().startOf('hour'),
+                endDate: moment().startOf('hour').add(32, 'hour'),
+                locale: {
+                    format: 'DD/MM/YYYY'
+                }
+            });
+        });
+        $(function () {
+            $('input[name="ReportTime"]').daterangepicker({
+                timePicker: true,
+                startDate: moment().startOf('hour'),
+                endDate: moment().startOf('hour'),
+                locale: {
+                    format: 'DD/MM/YYYY'
+                }
+            });
+        });
+
+
+    </script>
+
+
+</body>
+</html>
